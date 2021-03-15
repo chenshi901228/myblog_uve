@@ -12,7 +12,7 @@
             <swiper :options="swiperOptions" ref="mySwiper">
               <swiper-slide
                 class="swiper-item"
-                v-for="(item, index) in listWithOutHomePage.length == 0
+                v-for="(item, index) in !listWithOutHomePage.length
                   ? []
                   : listWithOutHomePage[0].contents.slice(0, 5)"
                 :key="item._id"
@@ -96,13 +96,19 @@ export default {
   computed: {
     ...mapState(["list"]),
     ...mapGetters(["listWithOutHomePage"]),
+    swiper() {
+      return this.$refs.mySwiper.$swiper;
+    },
   },
   data() {
     return {
       swiperOptions: {
         slidesPerView: 4,
         spaceBetween: 10,
-        autoplay: true,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
         speed: 1000,
         loop: true,
       },
@@ -111,10 +117,10 @@ export default {
   methods: {
     ...mapMutations(["classifyItem", "get_item_details"]),
     prevBtn() {
-      this.$refs.mySwiper.$swiper.slideNext(500);
+      this.swiper.slidePrev(500);
     },
     nextBtn() {
-      this.$refs.mySwiper.$swiper.slideNext(500);
+      this.swiper.slideNext(500);
     },
     toClassifyItem(i) {
       this.classifyItem(i + 1);

@@ -4,7 +4,7 @@ import ElementUi from 'element-ui'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 import 'element-ui/lib/theme-chalk/index.css'
-import 'swiper/swiper.min.css'
+import 'swiper/css/swiper.min.css'
 
 import router from './router'
 import store from './store'
