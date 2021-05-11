@@ -43,7 +43,7 @@ export default {
     return {};
   },
   mounted() {
-    console.log("home")
+    console.log("home");
     window.onscroll = function () {
       if (
         document.documentElement.scrollTop > 300 ||

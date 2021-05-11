@@ -1,6 +1,6 @@
 article{
     width: 100%;
-    min-width: 1400px;
+    // min-width: 1400px;
     padding: 50px 0 0 200px;
     background-color: #EDEDED;
     .header{
@@ -142,6 +142,7 @@ article{
                             img{
                                 width: 20px;
                                 vertical-align: middle;
+                                display: inline-block;
                             }
                         }
                         p{

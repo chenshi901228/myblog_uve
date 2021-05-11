@@ -80,8 +80,8 @@
       </div>
       <div class="footer">
         <p>
-          Copyright 2021 Inc. AllRights Reserved. Design by 个人博客
-          蜀ICP备19001492号-1
+          Copyright {{ new Date().getFullYear() }} Inc. AllRights Reserved.
+          Design by 个人博客 蜀ICP备19001492号-1
         </p>
       </div>
     </article>
@@ -103,8 +103,22 @@ export default {
   data() {
     return {
       swiperOptions: {
-        slidesPerView: 4,
+        slidesPerView: 1,
         spaceBetween: 10,
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+        },
         autoplay: {
           delay: 2000,
           disableOnInteraction: false,

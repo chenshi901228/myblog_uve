@@ -1,4 +1,5 @@
-import { httpRequest } from '../utils/http'
+// import { httpRequest } from '../utils/http'
+import {httpUtils} from '../utils/httpRequest'
 
 export default {
     namespaced: true,
@@ -31,7 +32,7 @@ export default {
     actions: {
         async getListAsync({ commit }, payload) {
             let { url } = payload
-            let { status, msg } = await httpRequest(url, "post")
+            let { status, msg } = await httpUtils(url, "post")
             if (status == "ok") {
                 commit("getData", msg)
             }
