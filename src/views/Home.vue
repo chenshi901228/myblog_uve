@@ -12,16 +12,14 @@
             <swiper :options="swiperOptions" ref="mySwiper">
               <swiper-slide
                 class="swiper-item"
-                v-for="(item, index) in !listWithOutHomePage.length
-                  ? []
-                  : listWithOutHomePage[0].contents.slice(0, 5)"
-                :key="item._id"
+                v-for="(item, index) in !loopList.length ? [] : loopList"
+                :key="item.id"
               >
                 <img
                   :src="
-                    item.showImg == undefined || ''
+                    item.cover_img == null || ''
                       ? require('../static/images/head_img.jpg')
-                      : item.showImg
+                      : item.cover_img
                   "
                 />
                 <p @click="toDetails(0, index)">{{ item.title }}</p>
@@ -36,37 +34,33 @@
           </div>
         </div>
         <div class="container">
-          <div
-            class="ify"
-            v-for="(item, index) in listWithOutHomePage"
-            :key="item._id"
-          >
+          <div class="ify" v-for="item in list" :key="item.class_id">
             <div class="ify-top">
               <div class="ify-top-img">
                 <img src="../static/images/icon/menu.png" alt="" />
               </div>
               <div class="ify-top-title">
-                <p>{{ item.title }}</p>
+                <p>{{ item.class_name }}</p>
                 <a
                   class="toclassifyItem"
-                  @click="toClassifyItem(index)"
+                  @click="toClassifyItem(item.class_name, item.class_id)"
                   href="javascript:void(0)"
                   >更多</a
                 >
               </div>
             </div>
             <ul class="ify-item">
-              <li v-for="(i, _index) in item.contents.slice(0, 5)" :key="i._id">
+              <li v-for="i in item.contents" :key="i.id">
                 <a
                   class="toDetail"
-                  @click="toDetails(index, _index)"
+                  @click="toDetails(item.class_name, i.id)"
                   href="javascript:void(0)"
                 >
                   <img src="../static/images/icon/right.png" alt="" />{{
-                    i.intro
+                    i.introduce
                   }}</a
                 >
-                <p>{{ i.date.slice(5, 10) }}</p>
+                <p>{{ i.createDate.slice(5, 10) }}</p>
               </li>
             </ul>
           </div>
@@ -81,7 +75,7 @@
       <div class="footer">
         <p>
           Copyright {{ new Date().getFullYear() }} Inc. AllRights Reserved.
-          Design by 个人博客 蜀ICP备19001492号-1
+          Design by 陈实 蜀ICP备19001492号-1
         </p>
       </div>
     </article>
@@ -90,12 +84,11 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapGetters, mapMutations } = createNamespacedHelpers("home");
+const { mapState, mapMutations } = createNamespacedHelpers("home");
 export default {
   name: "Home",
   computed: {
-    ...mapState(["list"]),
-    ...mapGetters(["listWithOutHomePage"]),
+    ...mapState(["list", "loopList"]),
     swiper() {
       return this.$refs.mySwiper.$swiper;
     },
@@ -136,15 +129,15 @@ export default {
     nextBtn() {
       this.swiper.slideNext(500);
     },
-    toClassifyItem(i) {
-      this.classifyItem(i + 1);
-      this.$router.push("/classifyItem/" + (i + 1));
+    toClassifyItem(currentClassItem, i) {
+      this.classifyItem(currentClassItem);
+      this.$router.push("/classifyItem/" + i);
     },
-    toDetails(i_ify, i_content) {
-      this.classifyItem(i_ify + 1);
+    toDetails(currentClassItem, contentId) {
+      this.classifyItem(currentClassItem);
       this.$router.push({
         name: "articleDetails",
-        params: { id: i_ify + 1, title: i_content },
+        params: { id: contentId },
       });
     },
   },

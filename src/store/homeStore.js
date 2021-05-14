@@ -1,41 +1,32 @@
-// import { httpRequest } from '../utils/http'
-import {httpUtils} from '../utils/httpRequest'
+import {
+    httpUtils
+} from '../utils/httpRequest'
 
 export default {
     namespaced: true,
     state: {
         list: [],
-        currentIfyItem: 0,
-        currentArticle: {}
-    },
-    getters: {
-        listWithOutHomePage: state => {
-            return state.list.slice(1)
-        },
-        currentObj: state => {
-            return state.list[state.currentIfyItem]
-        }
+        loopList: [],
+        currentIfyItem: "首页",
     },
     mutations: {
-        getData(state, params) {
-            Object.assign(state, { list: params })
-        },
         classifyItem(state, params) {
-            state.currentIfyItem = parseInt(params)
+            state.currentIfyItem = params
         },
-        getArticleDetails(state, params) {
-            let id = parseInt(params.id)
-            let title = parseInt(params.title)
-            state.currentArticle = state.list[id].contents[title]
+        homePageInit(state, params) {
+            Object.assign(state, {
+                list: params.list,
+                loopList: params.loopList
+            })
         }
+
     },
     actions: {
-        async getListAsync({ commit }, payload) {
-            let { url } = payload
-            let { status, msg } = await httpUtils(url, "post")
-            if (status == "ok") {
-                commit("getData", msg)
-            }
+        async getHomePageAsync({
+            commit
+        }, payload) {
+            let data = await httpUtils(payload.url, "post")
+            commit('homePageInit', data)
         }
     }
 }

@@ -3,17 +3,30 @@
     <header>
       <h6>陈实的个人博客</h6>
       <ul class="headNav">
-        <li v-for="(item, index) in list" :key="item._id">
+        <li>
           <a
-            :class="index == currentIfyItem ? 'actived' : ''"
+            :class="'首页' == currentIfyItem ? 'actived' : ''"
             href="javascript:void(0)"
-            @click="toClassifyItem(index)"
-            >{{ item.title }}</a
+            @click="toHomePage"
+            >首页</a
+          >
+        </li>
+        <li v-for="item in list" :key="item.class_id">
+          <a
+            :class="item.class_name == currentIfyItem ? 'actived' : ''"
+            href="javascript:void(0)"
+            @click="toClassifyItem(item.class_name, item.class_id)"
+            >{{ item.class_name }}</a
           >
         </li>
       </ul>
       <div class="serch">
-        <input type="text" placeholder="搜索" />
+        <input
+          v-model="serchInput"
+          @keyup.enter="serchHandle"
+          type="text"
+          placeholder="搜索"
+        />
         <img src="./static/images/icon/serch.png" />
       </div>
     </header>
@@ -39,8 +52,25 @@ export default {
   computed: {
     ...mapState(["list", "currentIfyItem"]),
   },
+  watch:{
+    // 设置右边aside列表内容
+    list(){
+      this.$store.commit("classItem/setRightList",this.list)
+      this.$store.commit("article/setRightList",this.list)
+    },
+    // 监听浏览器返回按钮以设置table选项卡为首页
+    $route:{
+      handler(){
+        if(this.$route.path=="/"){
+          this.classifyItem("首页")
+        }
+      }
+    }
+  },
   data() {
-    return {};
+    return {
+      serchInput: "",
+    };
   },
   mounted() {
     console.log("home");
@@ -54,18 +84,24 @@ export default {
         document.querySelector(".goTop").style.display = "none";
       }
     };
-    this.getListAsync({ url: "classifyTitle/findTitle" });
+    // 主页初始化数据
+    this.getHomePageAsync({ url: "homePageInit" });
   },
   methods: {
-    ...mapActions(["getListAsync"]),
+    ...mapActions(["getHomePageAsync"]),
     ...mapMutations(["classifyItem"]),
-    toClassifyItem(i) {
-      this.classifyItem(i);
-      if (i == 0) {
-        this.$router.push("/");
-      } else {
-        this.$router.push("/classifyItem/" + i);
-      }
+    //回到首页
+    toHomePage() {
+      this.classifyItem("首页");
+      this.$router.push("/");
+    },
+    // 跳转文章分类
+    toClassifyItem(currentClassItem,i) {
+      this.classifyItem(currentClassItem);
+      this.$router.push("/classifyItem/" + i);
+    },
+    serchHandle() {
+      console.log(`搜索内容:${this.serchInput}`);
     },
     goTop() {
       document.documentElement.scrollTop = 0;

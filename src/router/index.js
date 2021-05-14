@@ -20,7 +20,7 @@ const routes = [
     name: "classifyItem",
     component: ClassifyItem
   }, {
-    path: "/articleDetails/:id/:title",
+    path: "/articleDetails/:id",
     name: "articleDetails",
     component: ArticleDetails,
   }
