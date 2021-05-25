@@ -12,7 +12,7 @@
             <swiper :options="swiperOptions" ref="mySwiper">
               <swiper-slide
                 class="swiper-item"
-                v-for="(item, index) in !loopList.length ? [] : loopList"
+                v-for="item in !loopList.length ? [] : loopList"
                 :key="item.id"
               >
                 <img
@@ -22,7 +22,7 @@
                       : item.cover_img
                   "
                 />
-                <p @click="toDetails(0, index)">{{ item.title }}</p>
+                <p @click="toDetails(item.class_name, item.id)">{{ item.title }}</p>
               </swiper-slide>
             </swiper>
           </div>
@@ -75,7 +75,7 @@
       <div class="footer">
         <p>
           Copyright {{ new Date().getFullYear() }} Inc. AllRights Reserved.
-          Design by 陈实 蜀ICP备19001492号-1
+          Design by 陈实 ICP证：<a class="beian" href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备19001492号-1</a>
         </p>
       </div>
     </article>
@@ -151,5 +151,8 @@ export default {
     cursor: pointer;
     color: aquamarine;
   }
+}
+.beian:hover{
+  color: #e65f00;
 }
 </style>

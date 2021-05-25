@@ -1,4 +1,4 @@
 
 // const baseUrl = "http://myblogapi.chenshiservice.cn/"
-const baseUrl = "http://localhost/myblog/index.php/"
+const baseUrl = "https://myblogapiphp.chenshiservice.cn/"
 export { baseUrl }
