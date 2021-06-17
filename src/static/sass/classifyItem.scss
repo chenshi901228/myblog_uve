@@ -2,6 +2,9 @@ article{
     width: 100%;
     // min-width: 1400px;
     padding: 50px 0 0 200px;
+    @media screen and (max-width:1024px) {
+        padding: 50px 0 0 0;
+    }
     background-color: #EDEDED;
     .header{
         width: 100%;
@@ -28,8 +31,19 @@ article{
         width: 100%;
         display: flex;
         justify-content: space-between;
+        @media screen and (max-width:768px){
+            flex-direction: column;
+        }
         .left{
             width: 70%;
+            @media screen and (max-width:768px) {
+                width: 100%;
+            }
+            .pages{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
         .list{
             padding-left: 0;
@@ -104,7 +118,10 @@ article{
         }
         .right{
             width: 28%;
-            // background-color: aquamarine;
+            @media screen and (max-width:768px) {
+                width: 100%;
+                margin-top: 50px;
+            }
             height: 500px;
             .right-item{
                 margin-bottom: 20px;

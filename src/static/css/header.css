@@ -1,27 +1,86 @@
 header {
   width: 100%;
-  height: 50px;
-  background-color: #313842;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 99;
+  z-index: 999;
   top: 0;
-  left: 0; }
+  left: 0;
+  background-color: #313842; }
+  @media screen and (max-width: 1024px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start; } }
   header h6 {
     font-size: 22px;
     margin: 0;
     line-height: 50px;
     padding: 0 20px; }
+    @media screen and (max-width: 1024px) {
+      header h6 {
+        display: none; } }
+  header #menu {
+    display: none; }
+  header label {
+    display: none;
+    user-select: none;
+    width: 40px;
+    height: 50px;
+    margin-left: 20px;
+    position: relative; }
+    @media screen and (max-width: 1024px) {
+      header label {
+        display: block; } }
+    header label::before {
+      content: "";
+      width: 40px;
+      height: 6px;
+      display: block;
+      background-color: #242121;
+      position: absolute;
+      top: 12px;
+      transition: transform .3s ease-in-out,top .3s .4s ease-in-out; }
+    header label::after {
+      content: "";
+      width: 40px;
+      height: 6px;
+      display: block;
+      background-color: #242121;
+      position: absolute;
+      bottom: 12px;
+      transition: transform .3s ease-in-out,bottom .3s .4s ease-in-out; }
+  header input[name="menu"]:checked + label::before {
+    top: 22px;
+    transform: rotate(45deg);
+    transition: top .3s ease-in-out,transform .3s .4s ease-in-out; }
+  header input[name="menu"]:checked + label::after {
+    bottom: 22px;
+    transform: rotate(-45deg);
+    transition: bottom .3s ease-in-out,transform .3s .4s ease-in-out; }
+  header input[name="menu"]:checked ~ ul {
+    height: 100vh;
+    transform: scaleY(1); }
   header ul {
     margin: 0;
     padding: 0;
     margin-left: 40px;
     display: flex;
     align-items: center;
-    flex-grow: 1; }
+    flex-grow: 1;
+    transition: all .3s;
+    transform-origin: 50% 0; }
+    @media screen and (max-width: 1024px) {
+      header ul {
+        width: 100vw;
+        align-items: flex-start;
+        margin-left: 20px;
+        flex-direction: column;
+        flex-grow: 0;
+        z-index: 100;
+        height: 0;
+        transform: scaleY(0); } }
     header ul li {
       margin-right: 30px; }
       header ul li .actived {
@@ -37,6 +96,9 @@ header {
   header .serch {
     position: relative;
     margin-right: 30px; }
+    @media screen and (max-width: 1024px) {
+      header .serch {
+        display: none; } }
     header .serch input {
       width: 220px;
       height: 30px;

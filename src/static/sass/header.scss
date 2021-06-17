@@ -1,50 +1,134 @@
-header{
+header {
     width: 100%;
     // min-width: 1400px;
-    height: 50px;
-    background-color: #313842;
+    // height: 50px;
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    z-index: 99;
+    z-index: 999;
     top: 0;
     left: 0;
-    h6{
+    background-color: #313842;
+    @media screen and (max-width:1024px) {
+        // opacity: 0.2;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    h6 {
+        @media screen and (max-width:1024px) {
+            display: none;
+        }
+
         font-size: 22px;
         margin: 0;
         line-height: 50px;
         padding: 0 20px;
     }
-    ul{
+
+
+    #menu{
+        display: none;
+    }
+
+    label{
+        display: none;
+        @media screen and (max-width:1024px) {
+            display: block;
+        }
+        user-select: none;
+        width: 40px;
+        height: 50px;
+        margin-left: 20px;
+        position: relative;
+        &::before{
+            content: "";
+            width: 40px;
+            height: 6px;
+            display: block;
+            background-color: #242121;
+            position: absolute;
+            top: 12px;
+            transition: transform .3s ease-in-out,top .3s .4s ease-in-out;
+        }
+        &::after{
+            content: "";
+            width: 40px;
+            height: 6px;
+            display: block;
+            background-color: #242121;
+            position: absolute;
+            bottom: 12px;
+            transition: transform .3s ease-in-out,bottom .3s .4s ease-in-out;
+        }
+    }
+    input[name="menu"]:checked+label{
+        &::before{
+            top: 22px;
+            transform: rotate(45deg);
+            transition: top .3s ease-in-out,transform .3s .4s ease-in-out;
+        }
+        &::after{
+            bottom: 22px;
+            transform: rotate(-45deg);
+            transition: bottom .3s ease-in-out,transform .3s .4s ease-in-out;
+        }
+    }
+    input[name="menu"]:checked~ul{
+        height: 100vh;
+        transform: scaleY(1);
+    }
+
+
+    ul {
         margin: 0;
         padding: 0;
         margin-left: 40px;
         display: flex;
         align-items: center;
         flex-grow: 1;
-        li{
+        transition: all .3s;
+        transform-origin: 50% 0;
+        @media screen and (max-width:1024px) {
+            width: 100vw;
+            align-items: flex-start;
+            margin-left: 20px;
+            flex-direction: column;
+            flex-grow: 0;
+            z-index: 100;
+            height: 0;
+            transform: scaleY(0);
+        }
+        li {
             margin-right: 30px;
-            .actived{
-                color: aquamarine!important;
+
+            .actived {
+                color: aquamarine !important;
             }
-            a{
+
+            a {
                 color: #fff;
                 font-size: 14px;
                 text-decoration: none;
                 line-height: 50px;
                 display: inline-block;
-                &:hover{
+
+                &:hover {
                     color: #999;
                 }
             }
         }
     }
-    .serch{
+
+    .serch {
         position: relative;
         margin-right: 30px;
-        input{
+        @media screen and (max-width:1024px){
+            display: none;
+        }
+        input {
             width: 220px;
             height: 30px;
             font-size: 14px;
@@ -55,16 +139,18 @@ header{
             padding-right: 30px;
             color: #666;
         }
-        img{
+
+        img {
             width: 20px;
             position: absolute;
             right: 0;
             top: 50%;
-            transform: translate(-50%,-50%)
+            transform: translate(-50%, -50%)
         }
     }
 }
-.goTop{
+
+.goTop {
     padding: 10px;
     background-color: rgba($color: #000000, $alpha: 0.6);
     position: fixed;
@@ -72,7 +158,8 @@ header{
     bottom: 10%;
     z-index: 77;
     display: none;
-    img{
+
+    img {
         width: 30px;
     }
 }

@@ -38,8 +38,9 @@
                 </div>
               </li>
             </ul>
-            <div class="pages bg-white py-8 flex justify-center">
+            <div class="bg-white py-8">
               <el-pagination
+              class="pages"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"

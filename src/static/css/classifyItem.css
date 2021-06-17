@@ -2,6 +2,9 @@ article {
   width: 100%;
   padding: 50px 0 0 200px;
   background-color: #EDEDED; }
+  @media screen and (max-width: 1024px) {
+    article {
+      padding: 50px 0 0 0; } }
   article .header {
     width: 100%;
     height: 40px;
@@ -23,8 +26,18 @@ article {
     width: 100%;
     display: flex;
     justify-content: space-between; }
+    @media screen and (max-width: 768px) {
+      article .main {
+        flex-direction: column; } }
     article .main .left {
       width: 70%; }
+      @media screen and (max-width: 768px) {
+        article .main .left {
+          width: 100%; } }
+      article .main .left .pages {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; }
     article .main .list {
       padding-left: 0;
       margin: 0;
@@ -80,6 +93,10 @@ article {
     article .main .right {
       width: 28%;
       height: 500px; }
+      @media screen and (max-width: 768px) {
+        article .main .right {
+          width: 100%;
+          margin-top: 50px; } }
       article .main .right .right-item {
         margin-bottom: 20px; }
         article .main .right .right-item .right-top {

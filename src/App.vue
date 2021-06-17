@@ -2,6 +2,8 @@
   <div id="app">
     <header>
       <h6>陈实的个人博客</h6>
+      <input type="checkbox" name="menu" id="menu">
+      <label for="menu"></label>
       <ul class="headNav">
         <li>
           <a
@@ -99,6 +101,7 @@ export default {
     toClassifyItem(currentClassItem,i) {
       this.classifyItem(currentClassItem);
       this.$router.push("/classifyItem/" + i);
+      document.querySelector("#menu").checked = false
     },
     serchHandle() {
       console.log(`搜索内容:${this.serchInput}`);

@@ -1,6 +1,9 @@
 aside{
+    @media screen and (max-width:1024px) {
+        display:none;
+    }
     width: 200px;
-    height: 100%;
+    height: 100vh;
     background-color: #20B2AA;
     padding: 0 10px;
     position: fixed;
